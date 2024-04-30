@@ -1,0 +1,33 @@
+<mat-grid-list cols="3" gutterSize="5px" rowHeight="300px">
+    <mat-grid-tile *ngFor="let book of (Books$ | async); trackBy: trackByISBN" class="rounded m-2 border" colspan="1" matBadgeColor="accent">
+        <mat-card class="mat-grid-tile-content w-100 d-flex flex-row">
+            <div class="mat-card-image-box align-self-baseline">
+                <img mat-card-image [src]="book['Image-URL-L']" alt="Photo of {{ book['Book-Title'] }}"
+                    class="h-100 w-100 rounded-inherit">
+            </div>
+            <div class="content w-50 d-block mx-auto position-relative h-100">
+                <mat-card-header>
+                    <mat-card-title>{{ book['Book-Title'] }}</mat-card-title>
+                    <mat-card-subtitle>{{ book['Book-Author'] }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    This book was Published By {{ book['Publisher'] }} in the year {{ book['Year-Of-Publication'] }}
+                </mat-card-content>
+                <mat-card-actions class="d-flex justify-content-between position-absolute bottom-0 w-100">
+                    <button #fav mat-icon-button matTooltip="Like this Book" color="accent"
+                        (click)="toggleColor($event)">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-flat-button matTooltip="{{ book['Average-Rating'] }}/10 Star Rated Book" color="accent">
+                        <mat-icon>star</mat-icon>
+                        <p class="p-0 m-0">{{ book['Average-Rating'] }}</p>
+                    </button>
+                    <button mat-raised-button matTooltip="Rate this Book" color="basic" (click)="getRecommendations(book['Book-Title'])">
+                        View
+                    </button>
+                </mat-card-actions>
+            </div>
+        </mat-card>
+
+    </mat-grid-tile>
+</mat-grid-list>

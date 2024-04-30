@@ -1,0 +1,16 @@
+<form class="w-100">
+    <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Search Here....</mat-label>
+        <input type="text" placeholder="Search Here...." aria-label="Search" matInput [formControl]="Search"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #autoComplete autoActiveFirstOption #auto="matAutocomplete"
+            (closed)="optionsOpen = !optionsOpen" (optionSelected)="getbook()">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+<util-book [Books$]="Books$" (Recommended)="Recommendations$ = $event"></util-book>
+<h2>Recommendations Based on your Searchers</h2>
+<util-book [Books$]="Recommendations$" (Recommended)="Recommendations$ = $event"></util-book>

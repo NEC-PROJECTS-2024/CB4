@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div *ngIf="msg" [class]="'alert alert-' + msg == 'Success'?'success':'danger'">
+        {{msg}}
+    </div>
+    <form #form="ngForm" (ngSubmit)="login(form)" class="d-flex flex-column">
+        <mat-form-field class="flex-grow-1">
+            <mat-label>User Id</mat-label>
+            <input matInput type="tel" name="userId" id="userId" placeholder="User Id" ngModel autocomplete="on">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="flex-grow-1" type="submit" role="button"
+            name="submit">Login</button>
+    </form>
+</div>
